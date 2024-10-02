@@ -27,9 +27,13 @@
 
                         <div class="sm:order-1">
                             <div class="mx-auto flex h-8 items-stretch text-gray-600">
-                            <button class="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">-</button>
-                            <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition"><%= line_item.quantity %></div>
-                            <button class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">+</button>
+                                <% if line_item.quantity > 1 %>
+                                    <%= button_to "-", line_item_subtract_quantity_path(line_item.product), class:"flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-black hover:text-white py-1" %>
+                                <% end %>
+
+                                <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition"><%= line_item.quantity %></div>
+
+                                <%= button_to "+", line_item_add_quantity_path(line_item.product), class:"flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white py-1" %>
                             </div>
                         </div>
                         </div>

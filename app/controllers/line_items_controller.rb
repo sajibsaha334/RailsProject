@@ -37,4 +37,24 @@ class LineItemsController < ApplicationController
         @line_item.save
       end
     end
+
+    def add_quantity
+      @selected_product = Product.find(params[:product_id])
+      @line_item = @current_cart.line_items.find_by(product_id: @selected_product)
+      @line_item.quantity += 1
+      @line_item.save
+
+      redirect_to carts_path(@current_cart)
+    end
+
+    def subtract_quantity
+      @selected_product = Product.find(params[:product_id])
+      @line_item = @current_cart.line_items.find_by(product_id: @selected_product)
+      if @line_item.quantity > 1
+        @line_item.quantity -= 1
+      end
+      @line_item.save
+
+      redirect_to carts_path(@current_cart)
+    end
 end
