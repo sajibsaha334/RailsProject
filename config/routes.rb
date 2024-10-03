@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   post "line_items_add_quantity/:product_id", to: "line_items#add_quantity", as: "line_item_add_quantity"
   post "line_items_subtract_quantity/:product_id", to: "line_items#subtract_quantity", as: "line_item_subtract_quantity"
 
+  get "customer_address", to: "customers#customer_address", as: "customer_address"
+  post "customer_address_update", to: "customers#customer_address_update", as: "customer_address_update"
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

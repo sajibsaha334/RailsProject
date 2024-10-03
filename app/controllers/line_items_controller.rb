@@ -12,6 +12,10 @@ class LineItemsController < ApplicationController
       else
         @line_item.quantity += params[:quantity].to_i
       end
+
+      if @line_item.quantity < 1
+        @line_item.quantity = 1
+      end
       @line_item.save
 
       redirect_to product_path(@selected_product)
