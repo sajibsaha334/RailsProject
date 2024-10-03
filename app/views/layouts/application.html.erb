@@ -22,7 +22,7 @@
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
-      <%= render "layouts/nav" %>
+      <%= content_for?(:success) ? yield(:success) : render("layouts/nav") %>
       <%= yield %>
     </main>
   </body>

@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   get "customer_address", to: "customers#customer_address", as: "customer_address"
   post "customer_address_update", to: "customers#customer_address_update", as: "customer_address_update"
 
+  post "/order", to: "orders#order", as: "order"
+  get "/success", to: "orders#success", as: "success"
+  get "/orders", to: "orders#index", as: "orders"
+  get "/order/:order_id", to: "orders#show", as: "order_show"
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
