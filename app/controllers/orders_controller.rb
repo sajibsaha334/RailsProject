@@ -16,10 +16,21 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders
+    if current_user.try(:type)
+      @orders = Order.all
+    else
+      @orders = current_user.orders
+    end
   end
 
   def show
     @order = Order.find(params[:order_id])
+  end
+
+  def mark_delivered
+    @order = Order.find(params[:order_id])
+    @order.delivered!
+
+    redirect_to orders_path
   end
 end

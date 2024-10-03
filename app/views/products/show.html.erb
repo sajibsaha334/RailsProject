@@ -26,16 +26,30 @@
                 </div>
                 <div class="flex -mx-2 mb-4 mt-5">
                     <div class="w-1/2 px-2">
-                        <%= button_to "Buy Now", line_item_buy_now_path(@product), class:"w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700 transition:ease-in duration-300" %>
+                        <% if current_user %>
+                            <%= button_to "Buy Now", line_item_buy_now_path(@product), class:"w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700 transition:ease-in duration-300" %>
+                        <% else %>
+                            <%= button_to "Buy Now", new_user_session_path, class:"w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700 transition:ease-in duration-300" %>
+                        <% end %>
                     </div>
                     <div class="w-1/2 px-2">
-                        <%= form_with(url: line_item_add_to_cart_path(@product), method: :post) do |form| %>
-                            <%= form.number_field :quantity %>
-                            <%= form.submit "Add to Cart", class:"bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 transition:ease-in duration-300" %>
+                        <% if current_user %>
+                            <%= form_with(url: line_item_add_to_cart_path(@product), method: :post) do |form| %>
+                                <%= form.number_field :quantity %>
+                                <%= form.submit "Add to Cart", class:"bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 transition:ease-in duration-300" %>
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="flex flex-row gap-4">
+            <%= link_to "Back To Products", root_path, class:"text-white px-4 py-3 bg-slate-800 hover:bg-slate-700 transition-300 rounded" %>
+
+            <% if current_user.try(:type) %>
+                <%= link_to "Edit Product", edit_product_path(@product), class:"text-white px-4 py-3 bg-green-500 hover:bg-green-400 transition-300 rounded" %>
+                <%= button_to "Delete Product", @product, method: :delete, class:"text-white px-4 py-3 bg-rose-600 hover:bg-rose-500 transition-300 rounded" %>
+            <% end %>
         </div>
     </div>
 </div>

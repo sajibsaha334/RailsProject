@@ -32,9 +32,23 @@
                         <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                         </svg>
-                        Confirmed
+                        <%= order.status %>
                         </dd>
                     </dl>
+
+                    <% if current_user.try(:type) %>
+                      <% if order.status=="pending" %>
+                        <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                            <%= button_to mark_delivered_path(order) do %>
+                            <dd class="cursor-pointer me-2 mt-1.5 inline-flex items-center rounded bg-green-500 px-3.5 py-1.5 text-xs font-medium text-white dark:bg-green-900 dark:text-green-300">
+                            Mark as Delivered
+                            </dd>
+                            <% end %>
+                        </dl>
+                      <% else %>
+                        <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1"></dl>
+                      <% end %>
+                    <% end %>
 
                     <div class="w-full grid sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end gap-4">
                         <%= link_to "View Details", order_show_path(order), class:"w-full inline-flex justify-center rounded-lg  border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 lg:w-auto" %>
