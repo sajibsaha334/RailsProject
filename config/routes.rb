@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "/orders", to: "orders#index", as: "orders"
   get "/order/:order_id", to: "orders#show", as: "order_show"
   post "/delivered/:order_id", to: "orders#mark_delivered", as: "mark_delivered"
+  post "/undelivered/:order_id", to: "orders#mark_undelivered", as: "mark_undelivered"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
